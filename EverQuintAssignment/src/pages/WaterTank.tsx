@@ -1,14 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import WaterTankTable from "../components/WaterTankTable";
 const WaterTank = () => {
   const [inputValue, setInputValue] = useState<string>(
     "0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1"
   );
   const [trappedWater, setTrappedWater] = useState<number | null>(null);
-  let arr = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
-  useEffect(() => {
-    if (trappedWater) calculateWater(trappedWater);
-  }, []);
 
   function calculateWater(height: number[]): number {
     let left = 0,
