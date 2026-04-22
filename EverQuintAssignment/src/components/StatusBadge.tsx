@@ -10,7 +10,6 @@ export const StatusBadge = ({
   sx,
   ...props
 }: StatusBadgeProps) => {
-  // Logic for priority colors
   const getPriorityStyles = () => {
     if (type !== "priority") return {};
     switch (label?.toString().toLowerCase()) {

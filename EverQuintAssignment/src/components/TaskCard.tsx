@@ -1,6 +1,6 @@
 import { Card, CardContent, Typography, Box, Stack } from "@mui/material";
 import { StatusBadge } from "./StatusBadge";
-import { AssigneeAvatar } from "./AsigneeAvatar"; // The one we discussed earlier
+import { AssigneeAvatar } from "./AsigneeAvatar";
 import { formatDistanceToNow } from "date-fns";
 
 export const TaskCard = ({

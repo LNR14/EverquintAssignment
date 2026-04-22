@@ -31,13 +31,11 @@ export const TaskForm = ({ initialData, onSave, onClose }: TaskFormProps) => {
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isDirty, setIsDirty] = useState(false);
-
-  // Requirement 2.2: "Dirty" state handling
   useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
       if (isDirty) {
         e.preventDefault();
-        e.returnValue = ""; // Shows browser confirmation
+        e.returnValue = "";
       }
     };
     window.addEventListener("beforeunload", handleBeforeUnload);
@@ -124,7 +122,7 @@ export const TaskForm = ({ initialData, onSave, onClose }: TaskFormProps) => {
       />
       <Autocomplete
         multiple
-        options={[]} // Add suggestions here if wanted
+        options={[]}
         freeSolo
         value={formData.tags}
         onChange={(_, newValue) => handleChange("tags", newValue)}
@@ -179,15 +177,15 @@ export const TaskForm = ({ initialData, onSave, onClose }: TaskFormProps) => {
             variant="contained"
             disableElevation
             sx={{
-              bgcolor: "#F4F5F7", // Soft grey background
-              color: "#42526E", // Darker slate text for readability
+              bgcolor: "#F4F5F7",
+              color: "#42526E",
               textTransform: "none",
               fontWeight: 600,
               fontSize: "0.875rem",
               px: 2,
               py: 0.6,
               "&:hover": {
-                bgcolor: "#EBECF0", // Slightly darker on hover
+                bgcolor: "#EBECF0",
                 boxShadow: "none",
               },
             }}
@@ -200,7 +198,7 @@ export const TaskForm = ({ initialData, onSave, onClose }: TaskFormProps) => {
             variant="contained"
             disableElevation
             sx={{
-              bgcolor: "#0052CC", // Jira Blue
+              bgcolor: "#0052CC",
               color: "#fff",
               textTransform: "none",
               fontWeight: 600,

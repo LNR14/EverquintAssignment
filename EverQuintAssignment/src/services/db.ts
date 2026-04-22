@@ -2,11 +2,8 @@ import { openDB, type IDBPDatabase } from "idb";
 
 const DB_NAME = "JiraBoardDB";
 const STORE_NAME = "tasks";
-const SCHEMA_VERSION = 2; // Current version
+const SCHEMA_VERSION = 2;
 
-/**
- * Task Model interface based on requirement 2.1
- */
 export interface Task {
   id?: number;
   title: string;
@@ -18,10 +15,6 @@ export interface Task {
   createdAt: string;
   updatedAt: string;
 }
-
-/**
- * Initializes the database and handles version migrations
- */
 export const initDB = async (): Promise<IDBPDatabase> => {
   return openDB(DB_NAME, SCHEMA_VERSION, {
     upgrade(db, oldVersion, newVersion, transaction) {
@@ -34,14 +27,11 @@ export const initDB = async (): Promise<IDBPDatabase> => {
         store.createIndex("status", "status");
       }
 
-      // VERSION 2: Migration Simulation (Requirement 2.2)
       if (oldVersion < 2) {
-        // Example: If we previously didn't have 'tags', we ensure they exist
         console.info(
           `Migrating database from version ${oldVersion} to ${newVersion}`
         );
 
-        // Notify user via a custom event that a migration happened
         window.dispatchEvent(
           new CustomEvent("db-migration-performed", {
             detail: { message: "Data migrated to new schema version." },
@@ -66,13 +56,11 @@ export const addTask = async (task: Omit<Task, "id">) => {
   });
 };
 
-// READ
 export const getAllTasks = async (): Promise<Task[]> => {
   const db = await initDB();
   return db.getAll(STORE_NAME);
 };
 
-// UPDATE
 export const updateTask = async (task: Task) => {
   const db = await initDB();
   const updatedTask = {
@@ -82,7 +70,6 @@ export const updateTask = async (task: Task) => {
   return db.put(STORE_NAME, updatedTask);
 };
 
-// DELETE
 export const deleteTask = async (id: number) => {
   const db = await initDB();
   return db.delete(STORE_NAME, id);

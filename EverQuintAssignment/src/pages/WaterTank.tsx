@@ -34,7 +34,6 @@ const WaterTank = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Convert string "0, 1, 2" into array [0, 1, 2]
     const numArr = inputValue
       .split(",")
       .map((val) => parseInt(val.trim()))

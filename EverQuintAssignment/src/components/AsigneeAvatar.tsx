@@ -4,10 +4,6 @@ interface AssigneeAvatarProps {
   name: string;
 }
 
-/**
- * Generates a deterministic color based on a string.
- * This ensures the same name always gets the same color.
- */
 const stringToColor = (string: string) => {
   let hash = 0;
   let i;
@@ -24,10 +20,6 @@ const stringToColor = (string: string) => {
 
   return color;
 };
-
-/**
- * Extracts initials from a name (e.g., "John Doe" -> "JD")
- */
 const getInitials = (name: string) => {
   const names = name.trim().split(" ");
   if (names.length >= 2) {
@@ -49,7 +41,7 @@ export const AssigneeAvatar = ({ name }: AssigneeAvatarProps) => {
           height: 32,
           fontSize: "0.875rem",
           fontWeight: 600,
-          boxShadow: "0 0 0 2px #fff", // Adds a nice border like JIRA
+          boxShadow: "0 0 0 2px #fff",
         }}
       >
         {getInitials(displayName)}

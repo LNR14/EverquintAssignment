@@ -2,7 +2,6 @@ import { useEffect, useState, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Box, Stack, Typography, Button, Container } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-// 1. Import DragDropContext and DropResult
 import { DragDropContext, type DropResult } from "@hello-pangea/dnd";
 
 import { FilterBar } from "../components/FilterBar";
@@ -53,12 +52,8 @@ export const TeamWorkflow = () => {
           new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
       );
   }, [tasks, filters]);
-
-  // 2. Introduce the onDragEnd Logic
   const onDragEnd = async (result: DropResult) => {
     const { destination, source, draggableId } = result;
-
-    // Dropped outside a valid droppable or in the exact same position
     if (!destination) return;
     if (
       destination.droppableId === source.droppableId &&
@@ -66,8 +61,6 @@ export const TeamWorkflow = () => {
     ) {
       return;
     }
-
-    // draggableId is the task.id. We find the task in our state.
     const taskId = parseInt(draggableId);
     const task = tasks.find((t) => t.id === taskId);
 
@@ -112,7 +105,6 @@ export const TeamWorkflow = () => {
 
       <FilterBar filters={filters} onFilterChange={handleFilterChange} />
 
-      {/* 3. Wrap the Column Stack in DragDropContext */}
       <DragDropContext onDragEnd={onDragEnd}>
         <Stack
           direction="row"
@@ -123,7 +115,6 @@ export const TeamWorkflow = () => {
             <BoardColumn
               key={status}
               title={status}
-              // We pass the filtered tasks for this column
               tasks={filteredTasks.filter((t) => t.status === status)}
               onEditTask={(task) => {
                 setEditingTask(task);

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 
 const MaxProfit = () => {
-  const [inputValue, setInputValue] = useState<string>("13"); // Example input
+  const [inputValue, setInputValue] = useState<string>("13");
   const [totalEarnings, setTotalEarnings] = useState<number | null>(null);
   const [solutions, setSolutions] = useState<string[]>([]);
 
@@ -54,8 +54,6 @@ const MaxProfit = () => {
       allSolutions: Array.from(dp[time].solutions),
     };
   }
-
-  // 2. HandleSubmit moved outside the logic function
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const time = parseInt(inputValue);

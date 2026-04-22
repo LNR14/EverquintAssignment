@@ -1,5 +1,5 @@
 import { Paper, Typography, Stack, Box } from "@mui/material";
-import { TaskCard } from "./TaskCard"; // Double-check this path
+import { TaskCard } from "./TaskCard";
 import { type Task } from "../services/db";
 import { Droppable, Draggable } from "@hello-pangea/dnd";
 
@@ -11,7 +11,6 @@ interface BoardColumnProps {
 
 export const BoardColumn = ({ title, tasks, onEditTask }: BoardColumnProps) => {
   return (
-    // 1. droppableId MUST match the status title used in your logic (e.g., "Backlog")
     <Droppable droppableId={title}>
       {(provided, snapshot) => (
         <Paper
