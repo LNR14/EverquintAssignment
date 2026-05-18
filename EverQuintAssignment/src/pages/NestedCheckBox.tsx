@@ -28,10 +28,7 @@ const initialData = {
 };
 
 const NestedCheckBox = () => {
-  // Store selected IDs in a Set for O(1) lookup
   const [selected, setSelected] = useState(new Set());
-
-  // Helper: Get all descendant IDs of a node
   const getAllChildIds = (node, idList = []) => {
     if (node.children) {
       node.children.forEach((child) => {
@@ -42,7 +39,6 @@ const NestedCheckBox = () => {
     return idList;
   };
 
-  // Helper: Check status of a node's children
   const getChildStatus = (node) => {
     if (!node.children)
       return { allChecked: selected.has(node.id), someChecked: false };
