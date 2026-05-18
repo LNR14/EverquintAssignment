@@ -1,9 +1,19 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/Layout";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 import MaxProfit from "./pages/MaxProfit";
 import WaterTank from "./pages/WaterTank";
 import TeamWorkflow from "./pages/TeamWorkflow";
+import NestedCheckBox from "./pages/NestedCheckBox";
+
+const RootRoute = () => {
+  const { isAuthenticated } = useAuth();
+
+  return isAuthenticated ? <Home /> : <Login />;
+};
 
 const router = createBrowserRouter([
   {
@@ -12,7 +22,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <RootRoute />,
       },
       {
         path: "max-profit",
@@ -23,15 +33,32 @@ const router = createBrowserRouter([
         element: <WaterTank />,
       },
       {
-        path: "team-workflow",
-        element: <TeamWorkflow />,
+        path: "nested-checkbox",
+        element: <NestedCheckBox />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: "team-workflow",
+            element: <TeamWorkflow />,
+          },
+        ],
       },
     ],
   },
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
 }
 
 export default App;
